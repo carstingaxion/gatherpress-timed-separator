@@ -99,9 +99,7 @@ No. The block is restricted to `core/post-template` (the ancestor constraint is 
 
 ## Changelog
 
-### 0.1.0
-
-- Initial release.
+All notable changes to this project will be documented in the [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
