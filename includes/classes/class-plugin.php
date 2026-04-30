@@ -76,7 +76,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin' ) ) {
 		 * @return void
 		 */
 		public function register_block(): void {
-			$block_path = dirname( __DIR__ ) . '/build/';
+			$block_path = dirname( __DIR__, 2 ) . '/build/';
 
 			if ( ! file_exists( $block_path . 'block.json' ) ) {
 				return;
