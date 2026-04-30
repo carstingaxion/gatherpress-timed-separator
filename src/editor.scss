@@ -1,0 +1,38 @@
+/**
+ * GatherPress Timed Separator — Editor-Only Styles
+ *
+ * @package GatherpressTimedSeparator
+ * @since   0.1.0
+ */
+
+.gatherpress-timed-separator {
+	padding: var(--wp--preset--spacing--20, 0.75rem);
+	border: 1px dashed rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+
+	&__hint {
+		font-style: italic;
+		opacity: 0.6;
+		margin-top: 0.5rem;
+		margin-bottom: 0;
+		padding: 0;
+	}
+
+	&__loading {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem;
+	}
+
+	&--dimmed {
+		opacity: 0.3;
+		pointer-events: auto;
+		position: relative;
+
+		.gatherpress-timed-separator__inner {
+			text-decoration: line-through;
+			text-decoration-color: currentcolor;
+		}
+	}
+}

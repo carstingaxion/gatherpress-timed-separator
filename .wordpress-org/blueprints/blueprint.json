@@ -1,0 +1,57 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/?page_id=99",
+	"preferredVersions": {
+		"php": "8.3",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"login": true,
+	"plugins": [
+		"gatherpress"
+	],
+	"steps": [
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "GatherPress Timed Separator Demo",
+				"blogdescription": "A live demo of the Timed Separator block for GatherPress events"
+			}
+		},
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+          "GATHERPRESS_ALPHA_VERSION": 1
+      }
+    },
+    {
+			"step": "login",
+			"username": "admin",
+			"password": "password"
+		},
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "git:directory",
+        "url": "https://github.com/carstingaxion/gatherpress-timed-separator",
+        "ref": "HEAD"
+      },
+      "options": {
+        "activate": true
+      },
+      "progress": {
+        "caption": "Installing plugin from GitHub: carstingaxion/gatherpress-timed-separator"
+      }
+    },
+    {
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/wp-load.php'; $tz = wp_timezone(); $events = array( array( 'title' => 'Community Meetup: Spring Kickoff', 'start' => '2026-04-05 10:00:00', 'end' => '2026-04-05 12:00:00' ), array( 'title' => 'Workshop: Getting Started with GatherPress', 'start' => '2026-04-12 14:00:00', 'end' => '2026-04-12 16:00:00' ), array( 'title' => 'April Social Gathering', 'start' => '2026-04-20 18:00:00', 'end' => '2026-04-20 21:00:00' ), array( 'title' => 'May Day Celebration', 'start' => '2026-05-01 11:00:00', 'end' => '2026-05-01 15:00:00' ), array( 'title' => 'Contributor Day', 'start' => '2026-05-10 09:00:00', 'end' => '2026-05-10 17:00:00' ), array( 'title' => 'Summer Planning Session', 'start' => '2026-06-07 10:00:00', 'end' => '2026-06-07 12:00:00' ), array( 'title' => 'Mid-Year Review & Picnic', 'start' => '2026-06-21 12:00:00', 'end' => '2026-06-21 16:00:00' ), array( 'title' => 'New Year Kickoff 2027', 'start' => '2027-01-15 10:00:00', 'end' => '2027-01-15 12:00:00' ), ); foreach ( $events as $evt ) { $post_id = wp_insert_post( array( 'post_type' => 'gatherpress_event', 'post_title' => $evt['title'], 'post_status' => 'publish', 'post_content' => '<!-- wp:paragraph --><p>Join us for this exciting event!</p><!-- /wp:paragraph -->', ) ); if ( is_wp_error( $post_id ) || 0 === $post_id ) { continue; } if ( class_exists( '\\GatherPress\\Core\\Event' ) ) { $event_obj = new \\GatherPress\\Core\\Event( $post_id ); $event_obj->save_datetimes( array( 'datetime_start' => $evt['start'], 'datetime_end' => $evt['end'], 'timezone' => $tz->getName(), ) ); } } echo 'Created ' . count( $events ) . ' events.'; "
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/wp-load.php'; $page_content = '<!-- wp:group {\"align\":\"wide\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"var:preset|spacing|50\",\"bottom\":\"var:preset|spacing|50\"}}},\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group alignwide\" style=\"padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)\"><!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">Upcoming Events</h1>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p>Browse our upcoming community events, grouped by month.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:query {\"queryId\":1,\"query\":{\"perPage\":20,\"postType\":\"gatherpress_event\",\"order\":\"asc\",\"orderBy\":\"date\"},\"displayLayout\":{\"type\":\"list\"}} -->\n<div class=\"wp-block-query\"><!-- wp:post-template -->\n<!-- wp:gatherpress/timed-separator {\"interval\":\"month\"} /-->\n\n<!-- wp:group {\"style\":{\"spacing\":{\"padding\":{\"top\":\"var:preset|spacing|20\",\"bottom\":\"var:preset|spacing|20\"}}},\"layout\":{\"type\":\"constrained\"}} -->\n<div class=\"wp-block-group\" style=\"padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)\"><!-- wp:post-title {\"isLink\":true} /-->\n\n<!-- wp:post-date /-->\n\n<!-- wp:post-excerpt {\"moreText\":\"Read more\"} /--></div>\n<!-- /wp:group -->\n<!-- /wp:post-template -->\n\n<!-- wp:query-no-results -->\n<!-- wp:paragraph -->\n<p>No events found.</p>\n<!-- /wp:paragraph -->\n<!-- /wp:query-no-results --></div>\n<!-- /wp:query --></div>\n<!-- /wp:group -->'; $page_id = wp_insert_post( array( 'import_id' => 99, 'post_type' => 'page', 'post_title' => 'Upcoming Events', 'post_status' => 'publish', 'post_content' => $page_content, ) ); if ( ! is_wp_error( $page_id ) ) { update_option( 'show_on_front', 'page' ); update_option( 'page_on_front', $page_id ); } echo 'Demo page created with ID: ' . $page_id; "
+		}
+	]
+}

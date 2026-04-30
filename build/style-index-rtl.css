@@ -1,0 +1,44 @@
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/**
+ * GatherPress Timed Separator — Shared Styles (Editor + Frontend)
+ *
+ * @package GatherpressTimedSeparator
+ * @since   0.1.0
+ */
+.gatherpress-timed-separator {
+  margin-top: var(--wp--preset--spacing--30, 1rem);
+  margin-bottom: var(--wp--preset--spacing--30, 1rem);
+  clear: both;
+}
+.gatherpress-timed-separator__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--20, 0.75rem);
+  width: 100%;
+}
+.gatherpress-timed-separator__line {
+  flex: 1;
+  height: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  opacity: 0.3;
+}
+.gatherpress-timed-separator__label {
+  font-size: inherit;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: inherit;
+  line-height: 1.4;
+}
+.gatherpress-timed-separator__hint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: inherit;
+  opacity: 0.5;
+  margin: 0.25rem 0 0;
+  line-height: 1.3;
+}

@@ -1,0 +1,67 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "gatherpress/timed-separator",
+	"version": "0.1.0",
+	"title": "GatherPress Timed Separator",
+	"category": "design",
+	"description": "A dynamic separator block for GatherPress event query loops that displays date-boundary labels (day, week, month, or year) between event posts.",
+	"example": {
+		"attributes": {
+			"interval": "month"
+		}
+	},
+	"attributes": {
+		"interval": {
+			"type": "string",
+			"default": "month",
+			"enum": [ "day", "week", "month", "year" ]
+		},
+		"metadata": {
+			"type": "object"
+		}
+	},
+	"ancestor": [ "core/post-template" ],
+	"usesContext": [ "postId", "postType" ],
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalTextTransform": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"shadow": true,
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true,
+			"__experimentalDefaultControls": {
+				"color": true,
+				"radius": true,
+				"style": true,
+				"width": true
+			}
+		},
+		"interactivity": {
+			"clientNavigation": true
+		}
+	},
+	"textdomain": "gatherpress-timed-separator",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

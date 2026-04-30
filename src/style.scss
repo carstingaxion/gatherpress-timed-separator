@@ -1,0 +1,46 @@
+/**
+ * GatherPress Timed Separator — Shared Styles (Editor + Frontend)
+ *
+ * @package GatherpressTimedSeparator
+ * @since   0.1.0
+ */
+
+.gatherpress-timed-separator {
+	margin-top: var(--wp--preset--spacing--30, 1rem);
+	margin-bottom: var(--wp--preset--spacing--30, 1rem);
+	clear: both;
+
+	&__inner {
+		display: flex;
+		align-items: center;
+		gap: var(--wp--preset--spacing--20, 0.75rem);
+		width: 100%;
+	}
+
+	&__line {
+		flex: 1;
+		height: 0;
+		border: 0;
+		border-bottom: 1px solid currentcolor;
+		opacity: 0.3;
+	}
+
+	&__label {
+		font-size: inherit;
+		font-weight: 600;
+		white-space: nowrap;
+		flex-shrink: 0;
+		color: inherit;
+		line-height: 1.4;
+	}
+
+	&__hint {
+		text-align: center;
+		font-size: 0.75rem;
+		color: inherit;
+		opacity: 0.5;
+		margin: 0.25rem 0 0;
+		line-height: 1.3;
+	}
+
+}
